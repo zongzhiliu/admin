@@ -18,7 +18,7 @@ set smartcase " lower case for ignorecase
 " ------------------------------------------------------------ 
 " :retab to clear tabs, :%s/ \+$// to clear trailing 
 set autoindent 
-set shiftwidth=4 
+set shiftwidth=4
 set tabstop=4 
 set expandtab " insert spaces instead, ctrl-v tab to insert tab 
 "set smarttab " shiftwidth tab to indent, tabstop spaces to align 

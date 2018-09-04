@@ -1,3 +1,4 @@
+source ~/.bashrc
 alias ls='/bin/ls -G'
 export PS1='@macbook \w$ '
 export essos='zongzhi_liu@essos.sema4genomics.com'
