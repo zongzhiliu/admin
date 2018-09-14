@@ -1,12 +1,10 @@
-alias load_modules="module load python py_packages"
-load_modules
-module load vcflib
-module load tabix
+alias load_modules="module load python py_packages vcflib tabix"
+#load_modules
 export GRCH37=/hpc/genome_fa/GRCh37.p13.genome.fa
 
 
 # necessary for installing anaconda3
-export PYTHONPATH=
+#export PYTHONPATH=
 #/hpc/packages/minerva-common/py_packages/2.7/lib/python2.7/site-packages:/hpc/packages/minerva-common/python/2.7.14/lib/python2.7/site-packages
 
 # added by Anaconda3 installer
