@@ -2,23 +2,23 @@
 ## basic
 User: zongzhiliu/xj21q
 
-## remap keys at startup
-#settings - user - login items - add - ~/local/bin/remap...
+## selfservice
+zoom, office365, onedrive, printer, slack, xcode
+
+## .bash_profile
+rsync -a ~/github/admin/macbook/.ssh ~
+ssh tunnel to mysql
 
 ## software install
 printer work
 printer home
-Slack
-Sequel
-Dia
-Photoshop
-Illustrator
+Adobe: Photoshop Illustrator Acrobat
+MySQL: DbVisualizer MySQLWorkbench Sequel
+Anyconnect
 
-## homebrew
 
 ## anaconda
 r-essentials rstudio
-settings - user - login items - add - ~/local/bin/remap...
 
 ## install home brew
 * install dia

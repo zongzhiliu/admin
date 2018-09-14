@@ -1,7 +1,9 @@
-source ~/.bashrc
+source ~/github/admin/bashrc
 alias ls='/bin/ls -G'
 export PS1='@macbook \w$ '
 export essos='zongzhi_liu@essos.sema4genomics.com'
 
 # added by Miniconda3 installer
 export PATH="$HOME/miniconda3/bin:$HOME/local/bin:$PATH"
+
+source ~/github/admin/macbook/remap_rightAltToCtrl.sh
