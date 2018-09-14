@@ -2,13 +2,16 @@
 ## basic
 User: zongzhiliu/xj21q
 
+## selfservice
+zoom, office365, onedrive, printer, slack, xcode
+
 ## .bash_profile
+rsync -a ~/github/admin/macbook/.ssh ~
+ssh tunnel to mysql
 
 ## software install
 printer work
 printer home
-Slack
-MS: outlook, word, excel, powerpoint
 Adobe: Photoshop Illustrator Acrobat
 MySQL: DbVisualizer MySQLWorkbench Sequel
 Anyconnect
