@@ -5,3 +5,5 @@ export essos='zongzhi_liu@essos.sema4genomics.com'
 
 # added by Miniconda3 installer
 export PATH="$HOME/miniconda3/bin:$HOME/local/bin:$PATH"
+
+source ~/github/admin/macbook/remap_rightAltToCtrl.sh

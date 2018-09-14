@@ -2,23 +2,20 @@
 ## basic
 User: zongzhiliu/xj21q
 
-## remap keys at startup
-#settings - user - login items - add - ~/local/bin/remap...
+## .bash_profile
 
 ## software install
 printer work
 printer home
 Slack
-Sequel
-Dia
-Photoshop
-Illustrator
+MS: outlook, word, excel, powerpoint
+Adobe: Photoshop Illustrator Acrobat
+MySQL: DbVisualizer MySQLWorkbench Sequel
+Anyconnect
 
-## homebrew
 
 ## anaconda
 r-essentials rstudio
-settings - user - login items - add - ~/local/bin/remap...
 
 ## install home brew
 * install dia
