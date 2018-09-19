@@ -1,4 +1,6 @@
-alias load_modules="module load python py_packages vcflib tabix"
+alias load_python2="module load python py_packages vcflib tabix"
+alias load_python3="module load python/3.6.2 py_packages/3.6"
+alias moudule_grep="module avail 2>&1 | grep"
 #load_modules
 export GRCH37=/hpc/genome_fa/GRCh37.p13.genome.fa
 

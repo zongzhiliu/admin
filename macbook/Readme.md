@@ -15,6 +15,7 @@ printer home
 Adobe: Photoshop Illustrator Acrobat
 MySQL: DbVisualizer MySQLWorkbench Sequel
 Anyconnect
+karabiner to remap right option to ctrl
 
 
 ## anaconda
