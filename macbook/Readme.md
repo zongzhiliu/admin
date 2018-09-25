@@ -15,12 +15,18 @@ printer home
 Adobe: Photoshop Illustrator Acrobat
 MySQL: DbVisualizer MySQLWorkbench Sequel
 Anyconnect
+karabiner to remap right option to ctrl
 
 
 ## anaconda
+
 r-essentials rstudio
 
 ## install home brew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew cask install xquartz dia mysql-shell:q
+
+
 * install dia
 ```
 brew cask install dia
