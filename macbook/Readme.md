@@ -7,7 +7,7 @@ zoom, office365, onedrive, printer, slack, xcode
 
 ## .bash_profile
 rsync -a ~/github/admin/macbook/.ssh ~
-ssh tunnel to mysql
+add ~/github/admin/macbook/startup.sh to system preferences - Users & groups - login items
 
 ## software install
 printer work
@@ -15,7 +15,7 @@ printer home
 Adobe: Photoshop Illustrator Acrobat
 MySQL: DbVisualizer MySQLWorkbench Sequel
 Anyconnect
-karabiner to remap right option to ctrl
+Optional: karabiner to remap right option to ctrl
 
 
 ## anaconda
