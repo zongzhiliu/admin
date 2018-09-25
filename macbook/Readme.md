@@ -1,19 +1,26 @@
 # set up the macbook pro
 ## basic
-User: zongzhiliu/xj21q
+User: zongzhiliu/xj21q, fingerprint“
 
 ## selfservice
-zoom, office365, onedrive, printer, slack, xcode
+zoom, onedrive, printer, slack, xcode (agree)
 
-## .bash_profile
+## 
+```
+git clone https://github.com/zongzhiliu/admin.git
+ln -s ~/github/admin/macbook/bash_profile ~/.bash_profile
 rsync -a ~/github/admin/macbook/.ssh ~
+ln -s ~/github/admin/macbook/my.cnf ~/.my.cnf
+chmod -R 600 ~/.ssh
+```
+
 add ~/github/admin/macbook/startup.sh to system preferences - Users & groups - login items
 
 ## software install
-printer work
-printer home
-Adobe: Photoshop Illustrator Acrobat
-MySQL: DbVisualizer MySQLWorkbench Sequel
+printer at home
+Adobe: Photoshop Illustrator Acrobat https://www.adobe.com/creativecloud/catalog/desktop.htm
+apple: numbers
+MySQL: MySQLWorkbench
 Anyconnect
 Optional: karabiner to remap right option to ctrl
 
