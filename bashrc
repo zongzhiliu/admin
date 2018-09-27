@@ -6,4 +6,3 @@ alias wgetr='wget -e robots=off -r -nH -np'
 
 export PATH=~/local/bin:$PATH
 
-
