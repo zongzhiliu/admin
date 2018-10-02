@@ -1,3 +1,4 @@
+set clipboard=unnamed
 set ruler "always show row,col at bottom 
 set list " to show tab and trailing 
 set listchars=tab:→\ ,trail:•,nbsp:␣,extends:»,precedes:« 
