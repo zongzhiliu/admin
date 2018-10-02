@@ -1,14 +1,17 @@
 source ~/github/admin/bashrc
 alias ls='/bin/ls -G'
 export PS1='@macbook \w$ '
-export essos='zongzhi_liu@essos.sema4genomics.com'
 
 # added by Miniconda3 installer
-export PATH="$HOME/miniconda3/bin:$HOME/local/bin:$PATH"
+export PATH="$HOME/anaconda3/bin:$HOME/local/bin:$PATH"
+export RSTUDIO_WHICH_R=$HOME/anaconda3/bin/R
 
 #mysql tunnel
 alias start_mysql_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_db2_mysql\s"; then screen -S aws_db2_mysql -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L5000:localhost:3306 mysql_tunnel@34.235.71.97 -g -i $HOME/.ssh/tunnel_user -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
 #start_mysql_port_forwarding #run only once for login
+
+#tunnel to imsdw
+alias start_ident_msdw_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_ident_msdw_db\s"; then screen -S aws_ident_msdw_db -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L7000:testjcappilot.cbf5xbk4ekux.us-east-1.rds.amazonaws.com:3306 Zachary_liu@34.229.161.127 -g -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
 
 #remap right alt to right ctrl
 #ref: https://apple.stackexchange.com/questions/283252/how-do-i-remap-a-key-in-macos-sierra-e-g-right-alt-to-right-control
@@ -18,3 +21,6 @@ right_alt_2_ctrl () {
 	      "HIDKeyboardModifierMappingDst":0x7000000e4}]
 	}'
 }
+
+# added by Anaconda3 5.2.0 installer
+export PATH="/Users/zongzhiliu/anaconda3/bin:$PATH"
