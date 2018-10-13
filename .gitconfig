@@ -1,0 +1,31 @@
+[push]
+	default = simple
+[user]
+	email = zongzhi.liu@sema4genomics.com
+	name = Zongzhi Zachary Liu
+[core]
+	editor = vim
+
+[color "status"]
+  added = green
+  changed = yellow bold
+  untracked = red bold
+
+[alias]
+   cam = commit -am
+   hist = log --pretty=format:'%w(96,0,21)%h %ad | %s%d - %an' --graph --date=short
+   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+   ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+   lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+   ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+   dl = "!git ll -1"
+   f = "!git ls-files | grep -i"
+   grep = grep -Ii
+   la = "!git config -l | grep alias | cut -c 7-"
+   logtree = log --graph --oneline --decorate --all
+   caa = commit -a --amend -C HEAD
+   bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+   ignore = update-index --assume-unchanged
+   unignore = update-index --no-assume-unchanged
+   ignored = !git ls-files -v | grep "^[[:lower:]]"
+   flog=log --stat --follow -p -w --
