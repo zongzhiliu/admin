@@ -37,6 +37,7 @@ r-essentials rstudio
 host = 127.0.1.1
 user = zongzhi_liu
 password = u5TYN7fg5qpsF475jAtfAZ4E
+u5TYN7fg5qpsF475jAtfAZ4E
 pager=less -iMSx4 -FX -R
 #mysql_tunnel@34.235.71.97 using .ssh/mysql_tunnel
 
@@ -54,4 +55,4 @@ host = testjcappilot.cbf5xbk4ekux.us-east-1.rds.amazonaws.com
 user = zongzhi_liu
 password = u5TYN7fg5qpsF475jAtfAZ4E
 pager=less -iMSx4 -FX -R
-#zachary_liu@34.229.161.127 using .ssh/id_rsa
+#zachary_liu@34.229.161.127 using .ssh/id_rsa:q
