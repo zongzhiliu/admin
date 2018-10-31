@@ -1,5 +1,6 @@
 source ~/github/admin/bashrc
 alias ls='/bin/ls -G'
+alias esed='sed -E'
 export PS1='@macbook \w$ '
 
 # added by Miniconda3 installer
@@ -22,5 +23,4 @@ right_alt_2_ctrl () {
 	}'
 }
 
-# added by Anaconda3 5.2.0 installer
-export PATH="/Users/zongzhiliu/anaconda3/bin:$PATH"
+alias vim='/usr/bin/vim'
