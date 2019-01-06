@@ -1,6 +1,16 @@
 # set up the macbook pro
 ## basic
 User: zongzhiliu/xj21q, fingerprint“
+ln -sf /Users/zongzhiliu/git/admin/macbook/.tmux.conf .
+ln -sf /Users/zongzhiliu/git/admin/.gitconfig .
+ln -sf /Users/zongzhiliu/git/admin/vimrc .vimrc
+ln -sf /Users/zongzhiliu/git/admin/macbook/bash_profile .bash_profile
+
+ln -s ~/git/admin/macbook/databases.toml ~/.config/s4-radbinf-db-tools/
+ln -s ~/git/admin/macbook/my.cnf ~/.my.cnf
+ln -s ~/git/admin/macbook/.my.db2.cnf ~
+ln -s ~/git/admin/macbook/.my.imsdw.cnf ~
+ln -s ~/git/admin/macbook/.my.msdw.cnf ~
 
 ## selfservice
 zoom, onedrive, printer, slack, xcode (agree)
@@ -8,9 +18,7 @@ zoom, onedrive, printer, slack, xcode (agree)
 ## 
 ```
 git clone https://github.com/zongzhiliu/admin.git
-ln -s ~/github/admin/macbook/bash_profile ~/.bash_profile
 rsync -a ~/github/admin/macbook/.ssh ~
-ln -s ~/github/admin/macbook/my.cnf ~/.my.cnf
 chmod -R 600 ~/.ssh
 ```
 

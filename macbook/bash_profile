@@ -1,4 +1,4 @@
-source ~/github/admin/bashrc
+source ~/git/admin/bashrc
 alias ls='/bin/ls -G'
 alias esed='sed -E'
 export PS1='@macbook \w$ '
@@ -6,21 +6,29 @@ export PS1='@macbook \w$ '
 # added by Miniconda3 installer
 export PATH="$HOME/anaconda3/bin:$HOME/local/bin:$PATH"
 export RSTUDIO_WHICH_R=$HOME/anaconda3/bin/R
+export PYTHONPATH="$HOME/git/s4-oracle-alpha-db/chaos/zach"
 
 #mysql tunnel
 alias start_mysql_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_db2_mysql\s"; then screen -S aws_db2_mysql -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L5000:localhost:3306 mysql_tunnel@34.235.71.97 -g -i $HOME/.ssh/tunnel_user -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
 #start_mysql_port_forwarding #run only once for login
 
 #tunnel to imsdw
-alias start_ident_msdw_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_ident_msdw_db\s"; then screen -S aws_ident_msdw_db -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L7000:testjcappilot.cbf5xbk4ekux.us-east-1.rds.amazonaws.com:3306 Zachary_liu@34.229.161.127 -g -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
+alias start_mimsdw_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_ident_msdw_db\s"; then screen -S aws_ident_msdw_db -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L7000:testjcappilot.cbf5xbk4ekux.us-east-1.rds.amazonaws.com:3306 zachary_liu@34.229.161.127 -g -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
+start_mimsdw_port_forwarding
+alias mimsdw='mycli --defaults-file=~/.my.imsdw.cnf'
 
-#remap right alt to right ctrl
+export bastion=zach_liu@auto-abst-bastion-host-lb-542f9513ec56d4ad.elb.us-east-1.amazonaws.com
+alias start_rimsdw2_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_rimsdw2_db\s"; then screen -S aws_rimsdw2_db -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L9999:auto-abst-redshift-cluster.cpgxfro2regq.us-east-1.redshift.amazonaws.com:5439 zach_liu@auto-abst-bastion-host-lb-542f9513ec56d4ad.elb.us-east-1.amazonaws.com -g -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
+start_rimsdw2_port_forwarding
+alias rimsdw2='PGPASSFILE="${HOME}/.ssh/pgpass_rimsdw2" pgcli -h 127.0.0.1 -p 9999 -U zongzhi_liu dev'
+
+#remap right alt to right ctrl: deprecated in favor of iterm2 conf
 #ref: https://apple.stackexchange.com/questions/283252/how-do-i-remap-a-key-in-macos-sierra-e-g-right-alt-to-right-control
-right_alt_2_ctrl () {
-	hidutil property --set '{"UserKeyMapping":
-	    [{"HIDKeyboardModifierMappingSrc":0x7000000e6,
-	      "HIDKeyboardModifierMappingDst":0x7000000e4}]
-	}'
-}
+#right_alt_2_ctrl () {
+#	hidutil property --set '{"UserKeyMapping":
+#	    [{"HIDKeyboardModifierMappingSrc":0x7000000e6,
+#	      "HIDKeyboardModifierMappingDst":0x7000000e4}]
+#	}'
+#}
 
 alias vim='/usr/bin/vim'

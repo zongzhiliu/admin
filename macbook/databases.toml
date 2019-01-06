@@ -1,0 +1,13 @@
+[mdmsdw]
+db_type = "mysql"
+conf_file = "~/.my.dmsdw.cnf"
+
+[mimsdw]
+db_type = "mysql"
+conf_file = "~/.my.imsdw.cnf"
+
+[rdmsdw]
+db_type = "redshift"
+conf_file = "~/.pgpass_rdmsdw"
+iam_role = "arn:aws:iam::011825642366:role/msdw_redshift"
+s3_bucket = "s4-radbinf-temp"

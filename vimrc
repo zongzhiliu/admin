@@ -25,8 +25,8 @@ set expandtab " insert spaces instead, ctrl-v tab to insert tab
 "set smarttab " shiftwidth tab to indent, tabstop spaces to align 
 
 
-vnoremap <space> zf
-nnoremap <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+"vnoremap <space> zf
+"nnoremap <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 
 " TMUX integration
 " -------------------------------------------------------------
@@ -74,3 +74,5 @@ nnoremap / /\v
 vnoremap / /\v
 cnoremap %s/ %smagic/
 cnoremap >s/ >smagic/ 
+
+"colorscheme evening
