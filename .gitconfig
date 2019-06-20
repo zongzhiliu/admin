@@ -29,6 +29,8 @@
    unignore = update-index --no-assume-unchanged
    ignored = !git ls-files -v | grep "^[[:lower:]]"
    flog=log --stat --follow -p -w --
+   br = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(align:30,left)%(color:yellow)%(refname:short)%(color:reset)%(end) %(align:16,left)%(color:green)%(committerdate:relative)%(color:reset)%(end) %(align:10,left)%(color:red)%(objectname:short)%(color:reset)%(end) %(align:15,left)%(color:magenta)%(authorname)%(color:reset)%(end) %(align:50,left)%(contents:subject)%(end)'
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

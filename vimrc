@@ -14,6 +14,7 @@ set hlsearch "
 set incsearch " start searching while typing 
 set magic " regex as in grep -w 
 set smartcase " lower case for ignorecase 
+syntax on
  
 " tab settings 
 " ------------------------------------------------------------ 
@@ -35,7 +36,7 @@ set expandtab " insert spaces instead, ctrl-v tab to insert tab
 function! Send_to_Tmux_Lite(text) 
    if !exists("t:target_input") 
       call inputsave() 
-      let t:target_input = input("Send line/selection to (-1 for the previous pane) ", '-1') 
+      let t:target_input = input("Send line/selection to (-1 for the previous pane) ", '0') 
       call inputrestore() 
    end 
  
@@ -43,14 +44,22 @@ function! Send_to_Tmux_Lite(text)
    call system("tmux set-buffer " . " '" . substitute(a:text, "'", "'\\\\''", 'g') . "'" ) 
    call system("tmux paste-buffer -t " . t:target_input) 
 endfunction  
-vmap <CR> "ry:call Send_to_Tmux_Lite(@r)<CR>gv<Esc>j 
-nmap <CR> V"ry:call Send_to_Tmux_Lite(@r)<CR>j 
- 
-" work with ipython 
-" slime.vim <c-c><c-c> 
-vmap <c-c><c-c> "+y:call Send_to_Tmux_Lite("%paste\n")<CR>gv<Esc>j 
-nmap <c-c><c-c> V"+y:call Send_to_Tmux_Lite("%paste\n")<CR>j 
 
+vnoremap <CR> "ry:call Send_to_Tmux_Lite(@r)<CR>gv<Esc>j
+
+let mapleader = ","
+vnoremap <leader>c :w !pbcopy<CR><CR>'>j
+noremap <leader>v :r !pbpaste<CR><CR>
+noremap <leader><leader> :call Send_to_Tmux_Lite("%paste\n")<CR>
+vnoremap <leader><CR> <leader>c<leader><leader>
+" vnoremap <leader><CR> :w !pbcopy<CR><CR> <bar> :!tmux send-keys -t0 '%paste'<CR>
+" nmap <leader><CR> V"ry:call Send_to_Tmux_Lite(@r)<CR>j
+
+" not working yet
+
+" work with ipython
+" vnoremap <leader><CR> "+y:call Send_to_Tmux_Lite("%paste\n")<CR>gv<Esc>j
+ 
 iab  Ymd  <c-r>= strftime("%Y%m%d") 
 " 
 " auto completion for make tree 

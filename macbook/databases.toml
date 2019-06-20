@@ -11,3 +11,9 @@ db_type = "redshift"
 conf_file = "~/.pgpass_rdmsdw"
 iam_role = "arn:aws:iam::011825642366:role/msdw_redshift"
 s3_bucket = "s4-radbinf-temp"
+
+[rimsdw2]
+db_type = "redshift"
+conf_file = "~/.pgpass_rimsdw2"
+aws_profile = "OracleAlphaProd"
+s3_bucket = "s4-oracle-production-temp-bucket"
