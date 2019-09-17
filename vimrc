@@ -26,9 +26,6 @@ set expandtab " insert spaces instead, ctrl-v tab to insert tab
 "set smarttab " shiftwidth tab to indent, tabstop spaces to align 
 
 
-"vnoremap <space> zf
-"nnoremap <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-
 " TMUX integration
 " -------------------------------------------------------------
 " enter to send the line/selection to the target pane 
@@ -85,3 +82,31 @@ cnoremap %s/ %smagic/
 cnoremap >s/ >smagic/ 
 
 "colorscheme evening
+" mouse
+set mouse=a
+set ttymouse=xterm2
+
+" fold
+set foldmethod=indent
+set foldnestmax=2
+set foldlevel=10 "open all folds at start
+"vnoremap <space> zf
+nnoremap <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+nnoremap z<Space> za
+nnoremap z<Return> zA
+nnoremap zz @=(foldlevel?'zR':'zM')<CR>
+    "zR,zM: open/close all the folds
+    "za/A: open/close the current folds (recursively)
+
+
+" tab and split
+noremap <leader>t :tabnew .
+noremap <leader>T :Te
+noremap <leader>s :split
+" Go to last active tab 
+au TabLeave * let g:lasttab = tabpagenr()
+noremap gl :exe "tabn ".g:lasttab<cr>
+
+set runtimepath^=~/.vim/bundle/ack.vim
+set runtimepath+=~/.vim/bundle/fzf.vim
+

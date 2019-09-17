@@ -4,10 +4,6 @@ alias esed='sed -E'
 alias git.g='git log --graph --oneline --decorate'
 alias git.p='git log -p --relative-date'
 alias gitf='fork'
-alias load.pca='load_into_db_schema_some_csvs.py rimsdw2 pca'
-alias dump.pca='select_from_db_schema_table.py rimsdw2 pca'
-alias psql.rimsdw='PGPASSFILE="${HOME}/.ssh/pgpass_rimsdw2" psql -h 127.0.0.1 -p 9999 -U zongzhi_liu dev'
-
 # added by Miniconda3 installer
 export PATH="$HOME/local/bin:$HOME/anaconda3/bin:$PATH"
 export RSTUDIO_WHICH_R=$HOME/anaconda3/bin/R
@@ -15,34 +11,51 @@ export RSTUDIO_WHICH_R=$HOME/anaconda3/bin/R
 # python settings: 
 #pip install ipdb, pytest, pandas
 #pip install future, future-breakpoint, future-fstrings
-export PYTHONPATH="$HOME/git/s4-oracle-alpha-db/chaos/zach:$PYTHONPATH"
-export PYTHONBREAKPOINT=IPython.core.debugger.set_trace #breakpoint()
+export git_s4oad="$HOME/git/s4-oracle-alpha-db"
+export PYTHONPATH="$git_s4oad/dev_patient_clinical/pca/py:$git_s4oad/dev_patient_clinical/pca/pca_zach/py"
+#export PYTHONBREAKPOINT=IPython.core.debugger.set_trace #breakpoint()
     #from __future__ import (absolute_import, division, print_function)
     #from builtins import *
     #python -m ipdb test.py for postmortem debug
 
 #tunnel to db2
-alias start_mysql_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_db2_mysql\s"; then screen -S aws_db2_mysql -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L5000:localhost:3306 mysql_tunnel@34.235.71.97 -g -i $HOME/.ssh/tunnel_user -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
+alias _start_mysql_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_db2_mysql\s"; then screen -S aws_db2_mysql -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L5000:localhost:3306 mysql_tunnel@34.235.71.97 -g -i $HOME/.ssh/tunnel_user -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
 
 # tunnel to msdw
-alias start_mdmsdw_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_mdmsdw_db\s"; then screen -S aws_mdmsdw_db -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L6000:s4-radbinf-msdw-de-2017-sean.cbf5xbk4ekux.us-east-1.rds.amazonaws.com:3306 msdw_tunnel@52.22.79.171 -g -i $HOME/.ssh/msdw_tunnel -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
-alias mdmsdw='mycli --defaults-file=~/.my.msdw.cnf'
+alias _start_mdmsdw_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.mdmsdw\s"; then screen -S mdmsdw -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L6000:s4-radbinf-msdw-de-2017-sean.cbf5xbk4ekux.us-east-1.rds.amazonaws.com:3306 msdw_tunnel@52.22.79.171 -g -i $HOME/.ssh/msdw_tunnel -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
+#alias mdmsdw='mycli --defaults-file=~/.my.msdw.cnf'
 
-#tunnel to imsdw
-alias start_mimsdw_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_ident_msdw_db\s"; then screen -S aws_ident_msdw_db -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L7000:testjcappilot.cbf5xbk4ekux.us-east-1.rds.amazonaws.com:3306 zachary_liu@34.229.161.127 -g -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
-alias mimsdw='mycli --defaults-file=~/.my.imsdw.cnf'
-#rimsdw2
-export bastion=zach_liu@auto-abst-bastion-host-lb-542f9513ec56d4ad.elb.us-east-1.amazonaws.com
-alias start_rimsdw2_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_rimsdw2_db\s"; then screen -S aws_rimsdw2_db -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L9999:auto-abst-redshift-cluster.cpgxfro2regq.us-east-1.redshift.amazonaws.com:5439 zach_liu@auto-abst-bastion-host-lb-542f9513ec56d4ad.elb.us-east-1.amazonaws.com -g -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
-alias rimsdw2='start_rimsdw2_port_forwarding; PGPASSFILE="${HOME}/.ssh/pgpass_rimsdw2" pgcli -h 127.0.0.1 -p 9999 -U zongzhi_liu dev'
-
-function start_all_port_forwarding {
-    start_rimsdw2_port_forwarding
-    start_mimsdw_port_forwarding
-    start_mdmsdw_port_forwarding
-    start_mysql_port_forwarding
+function start_ssh_tunnel { tunnel_name=$1; local_db_remote=$2; user_at_remote=$3
+    cmd="AUTOSSH_DEBUG=1 autossh -M 0 -N -L $local_db_remote $user_at_remote
+            -g -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
+            -o ServerAliveInterval=10 -o ServerAliveCountMax=1
+            -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"
+    if ! screen -ls | grep -q "[0-9]\+.$tunnel_name\s"; then
+        screen -S "$tunnel_name" -dm bash -c "$cmd"
+    fi
 }
 
+export mimsdw_host='testjcappilot.cbf5xbk4ekux.us-east-1.rds.amazonaws.com'
+export mimsdw_bastion='34.229.161.127'
+export rdmsdw_host='s4-dmsdw.cswcn2wwxepe.us-east-1.redshift.amazonaws.com'
+export rdmsdw_bastion='ec2-3-214-186-216.compute-1.amazonaws.com'
+export rimsdw_host='auto-abst-redshift-cluster.cpgxfro2regq.us-east-1.redshift.amazonaws.com'
+export rimsdw_bastion='auto-abst-bastion-host-lb-542f9513ec56d4ad.elb.us-east-1.amazonaws.com'
+#ssh -L 9998:$rdmsdw_host:5439 zongzhi_liu@$bastion
+
+function start_all_port_forwarding {
+    _start_mdmsdw_port_forwarding
+    _start_mysql_port_forwarding
+    start_ssh_tunnel mimsdw 7000:$mimsdw_host:3306 zachary_liu@$mimsdw_bastion
+    start_ssh_tunnel rdmsdw 9998:$rdmsdw_host:5439 zongzhi_liu@$rdmsdw_bastion
+    start_ssh_tunnel rimsdw 9999:$rimsdw_host:5439 zach_liu@$rimsdw_bastion
+}
+# screen -ls | grep Detached | cut -d. -f1 | xargs kill
+export PGHOST=localhost
+export PGUSER=zongzhi_liu
+alias rdmsdw="PGPASSWORD=$(cat ~/.pgpassword_rdmsdw); PGPORT=9998; PGDATABASE=s4_dmsdw_2019_q1"
+alias rimsdw="PGPASSWORD=$(cat ~/.pgpassword_rimsdw); PGPORT=9999; PGDATABASE=dev"
+alias mycli.mimsdw='mycli --defaults-file=~/.my.imsdw.cnf'
 
 #remap right alt to right ctrl: deprecated in favor of iterm2 conf
 #ref: https://apple.stackexchange.com/questions/283252/how-do-i-remap-a-key-in-macos-sierra-e-g-right-alt-to-right-control
@@ -54,8 +67,7 @@ right_alt_2_ctrl () {
 }
 
 right_alt_2_ctrl
-alias vim='/usr/bin/vim'
-
+# alias vim='/usr/bin/vim'
 
 #function timer_start {
 #  timer=${timer:-$SECONDS}
@@ -77,17 +89,17 @@ alias vim='/usr/bin/vim'
 #export PS1="\n\[$(tput bold)\]\[$(tput setaf 7)\]\$([[ \$? != 0 ]] && tput setaf 1)#[\$(date +%k:%M:%S)|\${timer_show}s]\[$(tput setaf 2)\] \u\[$(tput setaf 5)\] @ $THIS_COMP :\[$(tput setaf 3)\]\w \[$(tput setaf 3)\]    \$(__git_ps1)\n\[$(tput setaf 3)\]"
 #trap "timer_start; echo -ne $'\e[0m'" DEBUG
 #
-source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
-#
-#complete -W "$(cat ~/.ssh/config | grep '^Host ' | grep -v '*' | sed 's/Host //')" ssh
 
-export PS1='\W/$(__git_ps1 "[%s]")\$ '
+#curl -L https://raw.github.com/git/git/master/contrib/completion/git-prompt.sh > ~/.bash_git
+#source ~/.bash_git
+#export PS1='$(__git_ps1 "[%s]") \W/\$ '
+export PS1='\W\$ '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/Users/zongzhiliu/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+    eval "$__conda_setup" > /dev/null #turn off the msg of deactivate-gfortran_osx-64.sh
 else
     if [ -f "/Users/zongzhiliu/anaconda3/etc/profile.d/conda.sh" ]; then
         . "/Users/zongzhiliu/anaconda3/etc/profile.d/conda.sh"
@@ -97,3 +109,25 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+export OA_DB_SERVER=rimsdw2
+export SCHEMA_NAME='cohort_filters'
+export CLIN_REPO_DIR=$HOME/git/s4-oracle-alpha-db/dev_patient_clinical
+source ~/git/s4-oracle-alpha-db/chaos/nick/psql_env.sh
+    #PGPASSFILE="${HOME}/.pgpass_${OA_DB_SERVER}"
+    #export PGHOST; export PGPORT; export PGDATABASE; export PGUSER
+    #export PSQL="psql --echo-all --no-psqlrc -v ON_ERROR_STOP=1"
+#usage: query_from_oa_db 'select * from dev_patient_clincal_info.notes_v11' > tmp.csv
+function query_from_oa_db { sql=$1
+    select_from_db_schema_table.py $OA_DB_SERVER -q "$sql"
+}
+
+#usage: load_into_oa_schema tmp/tmp.csv
+function load_into_oa_schema { csvfile=$1
+    load_into_db_schema_some_csvs.py -d $OA_DB_SERVER ${SCHEMA_NAME} "${csvfile}"
+}
+
+# brew installed vim
+#export PATH=/usr/local/Cellar/vim/8.1.1700/bin:$PATH
+alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'

@@ -64,3 +64,6 @@ user = zongzhi_liu
 password = u5TYN7fg5qpsF475jAtfAZ4E
 pager=less -iMSx4 -FX -R
 #zachary_liu@34.229.161.127 using .ssh/id_rsa:q
+
+## update bash
+https://itnext.io/upgrading-bash-on-macos-7138bd1066ba
