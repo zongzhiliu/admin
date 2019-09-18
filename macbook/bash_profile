@@ -18,23 +18,20 @@ export PYTHONPATH="$git_s4oad/dev_patient_clinical/pca/py:$git_s4oad/dev_patient
     #from builtins import *
     #python -m ipdb test.py for postmortem debug
 
-#tunnel to db2
-alias _start_mysql_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.aws_db2_mysql\s"; then screen -S aws_db2_mysql -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L5000:localhost:3306 mysql_tunnel@34.235.71.97 -g -i $HOME/.ssh/tunnel_user -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
 
-# tunnel to msdw
-alias _start_mdmsdw_port_forwarding='if ! screen -ls | grep -q "[0-9]\+.mdmsdw\s"; then screen -S mdmsdw -dm bash -c "AUTOSSH_DEBUG=1 autossh -M 0 -N -L6000:s4-radbinf-msdw-de-2017-sean.cbf5xbk4ekux.us-east-1.rds.amazonaws.com:3306 msdw_tunnel@52.22.79.171 -g -i $HOME/.ssh/msdw_tunnel -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=10 -o ServerAliveCountMax=1 -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"; fi'
-#alias mdmsdw='mycli --defaults-file=~/.my.msdw.cnf'
-
-function start_ssh_tunnel { tunnel_name=$1; local_db_remote=$2; user_at_remote=$3
-    cmd="AUTOSSH_DEBUG=1 autossh -M 0 -N -L $local_db_remote $user_at_remote
-            -g -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
-            -o ServerAliveInterval=10 -o ServerAliveCountMax=1
+function start_ssh_tunnel {
+    tunnel_name=$1; shift
+    local_db_remote=$1; shift
+    user_at_remote=$1; shift
+    other_args=$@
+    cmd="AUTOSSH_DEBUG=1 autossh -g -M 0 -N -L $local_db_remote $user_at_remote $other_args \
+            -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+            -o ServerAliveInterval=10 -o ServerAliveCountMax=1 \
             -o ExitOnForwardFailure=yes -o ControlMaster=no -o ControlPath=/dev/null"
     if ! screen -ls | grep -q "[0-9]\+.$tunnel_name\s"; then
         screen -S "$tunnel_name" -dm bash -c "$cmd"
     fi
 }
-
 export mimsdw_host='testjcappilot.cbf5xbk4ekux.us-east-1.rds.amazonaws.com'
 export mimsdw_bastion='34.229.161.127'
 export rdmsdw_host='s4-dmsdw.cswcn2wwxepe.us-east-1.redshift.amazonaws.com'
@@ -42,10 +39,15 @@ export rdmsdw_bastion='ec2-3-214-186-216.compute-1.amazonaws.com'
 export rimsdw_host='auto-abst-redshift-cluster.cpgxfro2regq.us-east-1.redshift.amazonaws.com'
 export rimsdw_bastion='auto-abst-bastion-host-lb-542f9513ec56d4ad.elb.us-east-1.amazonaws.com'
 #ssh -L 9998:$rdmsdw_host:5439 zongzhi_liu@$bastion
+mdmsdw_host='s4-radbinf-msdw-de-2017-sean.cbf5xbk4ekux.us-east-1.rds.amazonaws.com'
+mdmsdw_bastion='52.22.79.171'
 
 function start_all_port_forwarding {
-    _start_mdmsdw_port_forwarding
-    _start_mysql_port_forwarding
+    #_start_mysql_port_forwarding
+    start_ssh_tunnel db2 5000:localhost:3306 mysql_tunnel@34.235.71.97 \
+        -i $HOME/.ssh/tunnel_user
+    start_ssh_tunnel mdmsdw 6000:$mdmsdw_host:3306 msdw_tunnel@$mdmsdw_bastion \
+        -i $HOME/.ssh/msdw_tunnel
     start_ssh_tunnel mimsdw 7000:$mimsdw_host:3306 zachary_liu@$mimsdw_bastion
     start_ssh_tunnel rdmsdw 9998:$rdmsdw_host:5439 zongzhi_liu@$rdmsdw_bastion
     start_ssh_tunnel rimsdw 9999:$rimsdw_host:5439 zach_liu@$rimsdw_bastion
@@ -53,9 +55,13 @@ function start_all_port_forwarding {
 # screen -ls | grep Detached | cut -d. -f1 | xargs kill
 export PGHOST=localhost
 export PGUSER=zongzhi_liu
-alias rdmsdw="PGPASSWORD=$(cat ~/.pgpassword_rdmsdw); PGPORT=9998; PGDATABASE=s4_dmsdw_2019_q1"
-alias rimsdw="PGPASSWORD=$(cat ~/.pgpassword_rimsdw); PGPORT=9999; PGDATABASE=dev"
-alias mycli.mimsdw='mycli --defaults-file=~/.my.imsdw.cnf'
+alias rdmsdw="PGPASSWORD=$(< ~/.pgpassword_rdmsdw); PGPORT=9998; PGDATABASE=s4_dmsdw_2019_q1"
+alias rimsdw="PGPASSWORD=$(< ~/.pgpassword_rimsdw); PGPORT=9999; PGDATABASE=dev"
+#usage rdmsdw; psql/pgcli ...
+
+alias mimsdw.mycli='mycli --defaults-file=~/.my.imsdw.cnf'
+alias mdmsdw.mycli='mycli --defaults-file=~/.my.msdw.cnf'
+alias db2.mycli='mycli'
 
 #remap right alt to right ctrl: deprecated in favor of iterm2 conf
 #ref: https://apple.stackexchange.com/questions/283252/how-do-i-remap-a-key-in-macos-sierra-e-g-right-alt-to-right-control
