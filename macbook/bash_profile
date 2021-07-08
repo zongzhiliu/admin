@@ -65,14 +65,14 @@ alias db2.mycli='mycli'
 
 #remap right alt to right ctrl: deprecated in favor of iterm2 conf
 #ref: https://apple.stackexchange.com/questions/283252/how-do-i-remap-a-key-in-macos-sierra-e-g-right-alt-to-right-control
-right_alt_2_ctrl () {
-	hidutil property --set '{"UserKeyMapping":
-	    [{"HIDKeyboardModifierMappingSrc":0x7000000e6,
-	      "HIDKeyboardModifierMappingDst":0x7000000e4}]
-	}' > NULL
-}
-
-right_alt_2_ctrl
+#right_alt_2_ctrl () {
+#	hidutil property --set '{"UserKeyMapping":
+#	    [{"HIDKeyboardModifierMappingSrc":0x7000000e6,
+#	      "HIDKeyboardModifierMappingDst":0x7000000e4}]
+#	}' > NULL
+#}
+#
+#right_alt_2_ctrl
 # alias vim='/usr/bin/vim'
 
 #function timer_start {
@@ -101,39 +101,24 @@ right_alt_2_ctrl
 #export PS1='$(__git_ps1 "[%s]") \W/\$ '
 export PS1='\W\$ '
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/zongzhiliu/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup" > /dev/null #turn off the msg of deactivate-gfortran_osx-64.sh
-else
-    if [ -f "/Users/zongzhiliu/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/zongzhiliu/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/zongzhiliu/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
-
-export OA_DB_SERVER=rimsdw2
-export SCHEMA_NAME='cohort_filters'
-export CLIN_REPO_DIR=$HOME/git/s4-oracle-alpha-db/dev_patient_clinical
-source ~/git/s4-oracle-alpha-db/chaos/nick/psql_env.sh
-    #PGPASSFILE="${HOME}/.pgpass_${OA_DB_SERVER}"
-    #export PGHOST; export PGPORT; export PGDATABASE; export PGUSER
-    #export PSQL="psql --echo-all --no-psqlrc -v ON_ERROR_STOP=1"
-#usage: query_from_oa_db 'select * from dev_patient_clincal_info.notes_v11' > tmp.csv
-function query_from_oa_db { sql=$1
-    select_from_db_schema_table.py $OA_DB_SERVER -q "$sql"
-}
-
-#usage: load_into_oa_schema tmp/tmp.csv
-function load_into_oa_schema { csvfile=$1
-    load_into_db_schema_some_csvs.py -d $OA_DB_SERVER ${SCHEMA_NAME} "${csvfile}"
-}
-
-# brew installed vim
-#export PATH=/usr/local/Cellar/vim/8.1.1700/bin:$PATH
-alias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
+#gvexport OA_DB_SERVER=rimsdw2
+#gvexport SCHEMA_NAME='cohort_filters'
+#gvexport CLIN_REPO_DIR=$HOME/git/s4-oracle-alpha-db/dev_patient_clinical
+#gvsource ~/git/s4-oracle-alpha-db/chaos/nick/psql_env.sh
+#gv    #PGPASSFILE="${HOME}/.pgpass_${OA_DB_SERVER}"
+#gv    #export PGHOST; export PGPORT; export PGDATABASE; export PGUSER
+#gv    #export PSQL="psql --echo-all --no-psqlrc -v ON_ERROR_STOP=1"
+#gv#usage: query_from_oa_db 'select * from dev_patient_clincal_info.notes_v11' > tmp.csv
+#gvfunction query_from_oa_db { sql=$1
+#gv    select_from_db_schema_table.py $OA_DB_SERVER -q "$sql"
+#gv}
+#gv
+#gv#usage: load_into_oa_schema tmp/tmp.csv
+#gvfunction load_into_oa_schema { csvfile=$1
+#gv    load_into_db_schema_some_csvs.py -d $OA_DB_SERVER ${SCHEMA_NAME} "${csvfile}"
+#gv}
+#gv
+#gv# brew installed vim
+#gv#export PATH=/usr/local/Cellar/vim/8.1.1700/bin:$PATH
+#gvalias gvim='/Applications/MacVim.app/Contents/MacOS/Vim -g'
